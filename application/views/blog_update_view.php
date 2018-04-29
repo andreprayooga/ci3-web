@@ -46,9 +46,10 @@
           <label for="title">Title</label> 
           <input type="text" class="form-control" id="title" name="title" value="<?php echo $records[0]['title'] ?>"> 
         </div> 
-        <div class="form-group"> 
-          <label for="content">Content</label> 
-          <input type="text" class="form-control" id="content" name="content" value="<?php echo $records[0]['content'] ?>"> 
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea class="form-control" id="content" name="content" rows="3" value="<?php echo $records[0]['content'] ?>">
+          </textarea>
         </div>
         <img src="<?php echo base_url(); ?>/uploads/<?php echo $records[0]['image_file'] ?>" alt="File Tidak Ada" height="100px" width="100px">
         <div class="form-group"> 

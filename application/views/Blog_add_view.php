@@ -44,9 +44,9 @@
     <label for="title">Title</label>
     <input type="text" class="form-control" id="title" name="title" placeholder="Title">
   </div>
-  <div class="form-group">
+   <div class="form-group">
     <label for="content">Content</label>
-    <input type="text" class="form-control" id="content" name="content" placeholder="Content">
+    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
   </div>
   <div class="form-group">
     <label for="image_file">Image</label>

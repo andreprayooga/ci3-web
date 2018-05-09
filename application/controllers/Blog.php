@@ -3,6 +3,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends CI_Controller {
 
+  public function pagination() { 
+    $limit_per_page=10;
+    $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+    $total_records= $this->Blog_model->get_total();
+
+    if($total_records > 0 ){
+      $data['records'] = $this->Blog_model->get_all_artikel($limit_per_page,$start_index);
+      $config['base_url'] = base_url().'index.php/blog/pagination';
+      $config['total_rows'] = $total_records;
+      $config['per_page'] = $limit_per_page;
+      $config['uri_segment'] = 3;
+
+      $this->pagination->initialize($config);
+
+      $data['links'] = $this->pagination->create_links();
+    }
+    $this->load->view('Blog_list',$data);
+
+  }
+
+  public function dataTable()
+  {
+    $data['records'] = $this->Blog_model->getAll(); 
+    $this->load->view('blog_table',$data);  
+  }
+
   public function index() {
 
     $data['records'] = $this->Blog_model->getAll();

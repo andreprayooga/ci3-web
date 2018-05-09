@@ -41,9 +41,9 @@
         </div>
         <div class="form-group">
           <label for="image_file">Image</label>
-          <input type = "file" name = "image_file" size = "20" />
+          <input type = "file" class="form-control-file" name = "image_file" size = "20" />
         </div>
-        <input type="submit" name="add" value="Tambah" class="btn btn-success">
+        <input type="submit" name="add" value="Tambah" class="btn btn-primary">
       </form>
     </div>
   </div>

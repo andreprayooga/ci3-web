@@ -3,6 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog_model extends CI_Model {
 
+  public function get_all_artikel($limit = FALSE, $offset = FALSE)
+    {
+        if($limit){
+            $this->db->limit($limit,$offset);
+        }
+        $this->db->order_by('blog.date','desc');
+        $query = $this->db->get('blog');
+        return $query->result_array();
+    }
+    public function get_total()
+    {
+        return $this->db->count_all('blog');
+    }
+
   public function getAll()
   {
     $query = $this->db->get("blog");

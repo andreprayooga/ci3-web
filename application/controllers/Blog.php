@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends CI_Controller {
 
+  public function __construct()
+  {
+    parent::__construct();
+    $this->load->helper('text');
+    //Do your magic here
+  }
+
   public function pagination() { 
     $limit_per_page=10;
     $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
@@ -19,20 +26,20 @@ class Blog extends CI_Controller {
 
       $data['links'] = $this->pagination->create_links();
     }
-    $this->load->view('Blog_list',$data);
+    $this->load->view('blog/Blog_list',$data);
 
   }
 
   public function dataTable()
   {
     $data['records'] = $this->Blog_model->getAll(); 
-    $this->load->view('blog_table',$data);  
+    $this->load->view('blog/blog_table',$data);  
   }
 
   public function index() {
 
     $data['records'] = $this->Blog_model->getAll();
-    $this->load->view('blog_list',$data);
+    $this->load->view('blog/blog_list',$data);
   }
 
   public function add_view() {
@@ -44,21 +51,21 @@ class Blog extends CI_Controller {
     $this->form_validation->set_rules('title', 'Title', 'required');
     if ($this->form_validation->run() == FALSE)
     {
-      $this->load->view('blog_add_view',$data); 
+      $this->load->view('blog/blog_add_view',$data); 
     }
     else
     {
       $config['upload_path']   = './uploads/';  
       $config['allowed_types'] = 'gif|jpg|png';  
-      $config['max_size']      = 80000;  
-      $config['max_width']     = 1024;  
-      $config['max_height']    = 768;   
+      $config['max_size']      = 1000;  
+      $config['max_width']     = 1000;  
+      $config['max_height']    = 1000;   
       $this->load->library('upload', $config); 
       $this->upload->initialize($config); 
 
       if ( ! $this->upload->do_upload('image_file')) { 
         $error = array('error' => $this->upload->display_errors());  
-        $this->load->view('blog_add_view', $error);  
+        $this->load->view('blog/blog_add_view', $error);  
       } 
 
       else {  
@@ -80,15 +87,15 @@ class Blog extends CI_Controller {
   public function add_action() {
       $config['upload_path']   = './uploads/'; 
          $config['allowed_types'] = 'gif|jpg|png'; 
-         $config['max_size']      = 80000; 
-         $config['max_width']     = 1024; 
-         $config['max_height']    = 768;  
+         $config['max_size']      = 1000; 
+         $config['max_width']     = 1000; 
+         $config['max_height']    = 1000;  
          $this->load->library('upload', $config);
          $this->upload->initialize($config);
          
          if ( ! $this->upload->do_upload('image_file')) {
             $error = array('error' => $this->upload->display_errors()); 
-            $this->load->view('blog_add_view', $error); 
+            $this->load->view('blog/blog_add_view', $error); 
          }
          
          else { 
@@ -109,7 +116,7 @@ class Blog extends CI_Controller {
 
   public function byId($id){
     $data['records'] = $this->Blog_model->getOne($id);
-    $this->load->view('blog_view',$data);
+    $this->load->view('blog/blog_view',$data);
   }
   public function update_view($id) {
     $data['error'] = ""; 
@@ -121,21 +128,21 @@ class Blog extends CI_Controller {
     $data['records'] = $this->Blog_model->getOne($id);
     if ($this->form_validation->run() == FALSE)
     {
-      $this->load->view('blog_update_view',$data); 
+      $this->load->view('blog/blog_update_view',$data); 
     }
     else
     {
       $config['upload_path']   = './uploads/';  
       $config['allowed_types'] = 'gif|jpg|png';  
-      $config['max_size']      = 80000;  
-      $config['max_width']     = 1024;  
-      $config['max_height']    = 768;   
+      $config['max_size']      = 1000;  
+      $config['max_width']     = 1000;  
+      $config['max_height']    = 1000;   
       $this->load->library('upload', $config); 
       $this->upload->initialize($config); 
 
       if ( ! $this->upload->do_upload('image_file')) { 
         $data['error'] = $this->upload->display_errors();  
-        $this->load->view('blog_update_view', $data);  
+        $this->load->view('blog/blog_update_view', $data);  
       }
 
       else {  

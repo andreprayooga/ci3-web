@@ -24,7 +24,7 @@ public function create()
         );
 
         if($this->form_validation->run() === FALSE){
-            $this->load->view('cat_create', $data);
+            $this->load->view('category/cat_create', $data);
         } else {
             $this->Category_model->create_category();
             redirect('category');
@@ -34,7 +34,7 @@ public function create()
     public function index()
     {
         $data['cat_read'] = $this->Category_model->read_category();
-        $this->load->view('cat_read',$data);
+        $this->load->view('category/cat_read',$data);
     }
     public function update($id)
     {
@@ -54,7 +54,7 @@ public function create()
         $data['cat_update'] = $this->Category_model->read_category($id)[0];
         if($this->form_validation->run() === FALSE){
     
-            $this->load->view('cat_update', $data);
+            $this->load->view('category/cat_update', $data);
         
         } 
         else {

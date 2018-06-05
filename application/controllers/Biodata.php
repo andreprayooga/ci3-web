@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Biodata_controller extends CI_Controller {
+class Biodata extends CI_Controller {
 
 	public function index()
 	{
@@ -9,6 +9,6 @@ class Biodata_controller extends CI_Controller {
 		$data['biodata_query_object'] = $this->Biodata_model->getQueryObject();
 		$data['biodata_builder_array'] = $this->Biodata_model->getBuilderArray();
 		$data['biodata_builder_object'] = $this->Biodata_model->getBuilderObject();
-		$this->load->view('biodata',$data); //dengan passing data 
+		$this->load->view('biodata/biodata',$data); //dengan passing data 
 	}
 }

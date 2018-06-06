@@ -19,7 +19,8 @@
           <li><a href="<?php echo base_url("index.php/Blog/dataTable") ?>">DataTable</a></li>
           <li><a href="<?php echo base_url("index.php/Blog/pagination") ?>">Pagination</a></li>
         </ul>
-        <a class="btn btn-danger navbar-btn" href="<?php echo base_url("index.php/Blog/add_view") ?>">Add Blog</a>
+        <?php if ($this->session->userdata('level') == 1): ?>
+        <a class="btn btn-danger navbar-btn" href="<?php echo base_url("index.php/Blog/add_view") ?>">Add Blog</a><?php endif; ?>
         <ul class="nav navbar-nav navbar-right">
         <a class="btn btn-primary navbar-btn" href="<?php echo base_url("index.php/User/logout") ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
         </ul>
@@ -38,9 +39,11 @@
             <b>Content :</b> <?php echo word_limiter($value['content'], 70) ?>
           </div>
             <div class="button">
-              <a class="btn btn-sm btn-warning" href="<?php echo base_url('index.php/Blog/update_view/'.$value['id']) ?>"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+              <?php if ($this->session->userdata('level') == 1): ?>
+              <a class="btn btn-sm btn-warning" href="<?php echo base_url('index.php/Blog/update_view/'.$value['id']) ?>"><i class="glyphicon glyphicon-pencil"></i> Edit</a><?php endif; ?>
               <a class="btn btn-sm btn-info" href="<?php echo base_url('index.php/Blog/byId//'.$value['id']) ?>"><i class="glyphicon glyphicon-eye-open"></i> View</a>
-              <a class="btn btn-sm btn-danger" href="<?php echo base_url('index.php/Blog/delete_action/'.$value['id']) ?>"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+              <?php if ($this->session->userdata('level') == 1): ?>
+              <a class="btn btn-sm btn-danger" href="<?php echo base_url('index.php/Blog/delete_action/'.$value['id']) ?>"><i class="glyphicon glyphicon-trash"></i> Delete</a><?php endif; ?>
             </div>          
         </div>
         <br>

@@ -10,8 +10,8 @@
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	</head>
 	<body>
-		  <?php echo  validation_errors() ?>
-          <?php echo form_open_multipart('User/register');?>
+		<?php echo  validation_errors() ?>
+		<?php echo form_open_multipart('User/register');?>
 		<div class="container">
 			<div class="row" style="margin-top:100px">
 				<div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-2 col-md-offset-3">
@@ -46,6 +46,15 @@
 							<label for="password" class="col-sm-2 col-form-label">Password</label>
 							<div class="col-sm-10">
 								<input type="password" class="form-control" id="password" name="password" placeholder="Input Password" value="<?php echo set_value('password') ?>">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="level" class="col-sm-2 col-form-label">Level</label>
+							<div class="col-lg-10">
+								<select class="form-control-lg" id="level" name="level" value="<?php echo set_value('level') ?>">
+									<option value="1">Admin</option>
+									<option value="2">User</option>
+								</select>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary float-right" >Submit</button>

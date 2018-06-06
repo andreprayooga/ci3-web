@@ -57,7 +57,8 @@ class User extends CI_Controller {
  			foreach ($result as $row) {
  				$sess_array = array(
  					'user_id'=>$row->user_id,
- 					'username'=> $row->username
+ 					'username'=> $row->username,
+ 					'level'=> $row['level']
  				);
  				$this->session->set_userdata('logged_in',$sess_array);
  			}
@@ -72,6 +73,8 @@ class User extends CI_Controller {
          public function logout()
  	{
  		$this->session->unset_userdata('logged_in');
+ 		$this->session->unset_userdata('user_id');
+ 		$this->session->unset_userdata('username');
  		$this->session->sess_destroy();
  		redirect('Biodata','refresh');
  	}

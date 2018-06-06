@@ -11,6 +11,7 @@
        $result = $this->db->get('users');
 
        if($result->num_rows() == 1){
+          return $result->row(0)->level;
            return $result->row(0)->user_id;
        } else {
            return false;
@@ -25,7 +26,8 @@
         'kodepos' => $this->input->post('kodepos'),
         'email' => $this->input->post('email'),
         'username' => $this->input->post('username'),
-        'password' => $this->input->post('password')
+        'password' => $this->input->post('password'),
+        'level' => $this->input->post('level')
       );
       $this->db->insert('users',$data);
     }

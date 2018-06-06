@@ -30,8 +30,6 @@
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary float-right">Submit</button>
-						<button type="submit" class="btn btn-primary float-right mr-2" >Register</button>
-					</form>
 				</div>
 			</div>
 		</div>

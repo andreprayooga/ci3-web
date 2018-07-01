@@ -52,8 +52,8 @@
 							<label for="level" class="col-sm-2 col-form-label">Level</label>
 							<div class="col-lg-10">
 								<select class="form-control-lg" id="level" name="level" value="<?php echo set_value('level') ?>">
+									<option value="0">User</option>
 									<option value="1">Admin</option>
-									<option value="2">User</option>
 								</select>
 							</div>
 						</div>

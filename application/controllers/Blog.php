@@ -7,6 +7,7 @@ class Blog extends CI_Controller {
   {
     parent::__construct();
     $this->load->helper('text');
+    $this->load->helper('form');
     //Do your magic here
   }
 

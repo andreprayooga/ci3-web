@@ -23,7 +23,7 @@
     </div>
   </nav>
   <main role="main" class="container">
-    <a href="<?php echo base_url('index.php/category/create') ?>" class="btn btn-primary mb-3 ml-3">Add Category</a>
+    <a href="<?php echo base_url('index.php/category/create') ?>" class="btn btn-primary mb-3 ml-3"><i class="glyphicon glyphicon-plus"></i> Add Category</a>
 
 
     <br></br>

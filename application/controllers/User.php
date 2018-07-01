@@ -3,81 +3,92 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
 
-	public function __construct()
+    public function __construct()
     {
         parent::__construct();
                 
-        $this->load->library('form_validation', 'session');
+        $this->load->library('form_validation','session');
         $this->load->model('User_model');
     }
 
-	public function index()
-	{
-		$this->load->view('user/login');
-	}
+    public function index()
+    {
+        $this->load->view('user/register');
+    }
 
-	// Register user
-    public function register()
- 	{
- 		$this->load->library('form_validation');
- 		$this->form_validation->set_rules('nama','Nama','trim|required');
- 		$this->form_validation->set_rules('kodepos','KodePos','trim|required');
- 		$this->form_validation->set_rules('email','email','trim|required');
- 		$this->form_validation->set_rules('username','Username','trim|required');
- 		$this->form_validation->set_rules('password','Password','trim|required');
- 		if ($this->form_validation->run() == FALSE) {
- 			$this->load->view('user/register');
- 		} else {
- 			$this->load->model('User_model');
- 			$this->User_model->insert();
- 			redirect('User','refresh');
- 		}
- 	}
-    public function login()
- 	{
- 		$this->load->library('form_validation');
- 		$this->form_validation->set_rules('username','Username','trim|required');
- 		$this->form_validation->set_rules('password','Password','trim|required|callback_cekDb');
- 		if ($this->form_validation->run() == FALSE) {
- 			$this->load->view('user/login');
- 		} else {
- 			redirect('Blog','refresh');
- 		}
- 		
- 	}
+    // Register user
+    public function register(){
+        $data['page_title'] = 'Pendaftaran User';
 
- 	public function cekDb($password)
- 	{
- 		$this->load->model('User_model');
- 		$username = $this->input->post('username');
- 		$result = $this->User_model->login($username,$password);
- 		if($result){
- 			$sess_array = array();
- 			if (is_array($result) || is_object($result)){
- 			foreach ($result as $row) {
- 				$sess_array = array(
- 					'user_id'=>$row->user_id,
- 					'username'=> $row->username,
- 					'level'=> $row['level']
- 				);
- 				$this->session->set_userdata('logged_in',$sess_array);
- 			}
- 		}
- 			return true;
- 		}else{
- 			$this->form_validation->set_message('cekDb',"Login Gagal");
- 			return false;
- 		}
- 	}
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('kodepos', 'KodePos', 'required');
+        $this->form_validation->set_rules('email', 'Email','required|is_unique[users.email]');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 
-         public function logout()
- 	{
- 		$this->session->unset_userdata('logged_in');
- 		$this->session->unset_userdata('user_id');
- 		$this->session->unset_userdata('username');
- 		$this->session->sess_destroy();
- 		redirect('Biodata','refresh');
- 	}
+        if($this->form_validation->run() === FALSE){
+            $this->load->view('user/register', $data);
+        } else {
+            // Encrypt password
+            $enc_password = md5($this->input->post('password'));
+
+            $this->User_model->register($enc_password);
+
+            // Tampilkan pesan
+            $this->session->set_flashdata('user_registered', 'REGISTRATION DONE');
+
+            redirect('User/login');
+        }
+    }
+    public function login(){
+        $data['page_title'] = 'Log In';
+
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if($this->form_validation->run() === FALSE){
+            $this->load->view('user/login', $data);
+        } else {
+            // Get username
+    $username = $this->input->post('username');
+    // Get & encrypt password
+    $password = md5($this->input->post('password'));
+
+    // Login user
+    $user_id = $this->User_model->login($username, $password);
+
+    if($user_id){
+        // Buat session
+        $user_data = array(
+            'user_id' => $user_id,
+            'username' => $username,
+            'level' => $user_id['level'],
+            'logged_in' => true
+        );
+         $this->session->set_userdata($user_data);
+
+        // Set message
+        $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+
+        redirect('blog');
+    } else {
+        // Set message
+        $this->session->set_flashdata('login_failed', 'Login is invalid');
+
+        redirect('user/login');
+    }       
+}}
+         public function logout(){
+        // Unset user data
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('username');
+
+        // Set message
+        $this->session->set_flashdata('user_loggedout', 'Anda sudah log out');
+
+        redirect('Biodata');
+    }
 
 
 

@@ -22,7 +22,7 @@
     </div>
   </nav>
   <main role="main" class="container">
-     <a href="<?php echo base_url('index.php/blog/add_view') ?>" class="btn btn-primary mb-3 ml-3">Add Blog</a>
+     <a href="<?php echo base_url('index.php/blog/add_view') ?>" class="btn btn-primary mb-3 ml-3"><i class="glyphicon glyphicon-plus"></i> Add Blog</a>
     <br></br>
     <table id="dt-basic" class="table table-striped table-bordered" width="100%">
      <thead>
@@ -43,7 +43,7 @@
          <td><?php echo $d['title'] ?></td>
          <td>
       <a class="btn btn-sm btn-warning mb-1" href="<?php echo base_url('index.php/Blog/update_view/'.$d['id']) ?>"><i class="glyphicon glyphicon-pencil"></i> Edit </a>
-       <a class="btn btn-sm btn-info mb-1" href="<?php echo base_url('index.php/Blog/byId/'.$d['id']) ?>"><i class="glyphicon glyphicon-eye-open"></i> View</a>
+       <a class="btn btn-sm btn-info mb-1" href="<?php echo base_url('index.php/Blog/byId/'.$d['id']) ?>"><i class="glyphicon glyphicon-zoom-in"></i> View</a>
             <a class="btn btn-sm btn-danger mb-1" href="<?php echo base_url('index.php/Blog/delete_action/'.$d['id']) ?>"><i class="glyphicon glyphicon-trash"></i> Delete </a></td>
         </tr>
       <?php endforeach; ?>

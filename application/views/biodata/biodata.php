@@ -20,8 +20,14 @@
           <li><a href="#">Category</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="<?php echo base_url('index.php/User/register')?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-          <li><a href="<?php echo base_url('index.php/User/login')?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> Settings
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="<?php echo base_url('index.php/User/login')?>"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+              <li><a href="<?php echo base_url('index.php/User/register')?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </nav>

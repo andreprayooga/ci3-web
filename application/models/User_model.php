@@ -10,7 +10,8 @@ class User_model extends CI_Model {
            'kodepos' => $this->input->post('kodepos'),
            'email' => $this->input->post('email'),
            'username' => $this->input->post('username'),
-           'password' => $enc_password
+           'password' => $enc_password,
+           'level' => $this->input->post('level')
            
        );
 
@@ -32,6 +33,14 @@ class User_model extends CI_Model {
        } else {
            return false;
        }
+   }
+
+   public function show(){
+    $this->db->select('users1.*, users.username, users.password, user.level');
+    $this->db->from('users_level');
+    $this->db->join('users_level', 'users.users_id = users_level.akun', 'left');
+    $data = $this->db->get();
+    return $data->result();
    }
 
 

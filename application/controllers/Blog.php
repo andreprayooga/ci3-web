@@ -9,6 +9,9 @@ class Blog extends CI_Controller {
     $this->load->helper('text');
     $this->load->helper('form');
     //Do your magic here
+    if (!isset($_SESSION['logged_in'])){
+      redirect(base_url('index.php/User/login'),'refresh');
+    }
   }
 
   public function pagination() { 

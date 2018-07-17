@@ -15,9 +15,13 @@
           <a class="navbar-brand" href="#">MyCodeIgniter</a>
         </div>
         <ul class="nav navbar-nav">
+          <?php if ($this->session->userdata('level') == 1): ?>
           <li><a href="<?php echo base_url("index.php/Blog/dataTable") ?>">DataTable</a></li>
+          <?php endif; ?>
           <li><a href="<?php echo base_url("index.php/Blog/pagination") ?>">Pagination</a></li>
+          <?php if ($this->session->userdata('level') == 1): ?>
            <li><a href="<?php echo base_url("index.php/Category") ?>">Category</a></li>
+           <?php endif; ?>
         </ul>
         <?php if ($this->session->userdata('level') == 1): ?>
         <a class="btn btn-primary navbar-btn" href="<?php echo base_url("index.php/Blog/add_view") ?>">Add Blog</a>
@@ -33,11 +37,10 @@
       <div class="row">
       <?php foreach ($records as $key => $value): ?>
         <div class="row">
-          <div class="col-md-6"><img src="<?php echo base_url() ?>uploads/<?php echo $value['image_file'] ?>" class="img-thumbnail"></div>
+          <div class="col-md-3"><img src="<?php echo base_url() ?>uploads/<?php echo $value['image_file'] ?>" class="img-thumbnail" width="400"></div>
           <div class="media-body">
             <h5 class="mt-0 mb-1"><b>Title  :</b> <?php echo $value['title'] ?></h5>
             <h5 class="mt-0 mb-1"><b>Author :</b> <?php echo $value['author'] ?></h5>
-            <h5 class="text-muted"><b>Date  :</b> <?php echo $value['date'] ?></h5>
             <b>Content :</b> <?php echo word_limiter($value['content'], 70) ?>
           </div>
             <div class="button">

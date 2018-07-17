@@ -20,6 +20,7 @@ class User extends CI_Controller {
     public function register(){
         $data['page_title'] = 'Pendaftaran User';
 
+
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('kodepos', 'KodePos', 'required');
         $this->form_validation->set_rules('email', 'Email','required|is_unique[users.email]');
@@ -67,16 +68,20 @@ class User extends CI_Controller {
         );
          $this->session->set_userdata($user_data);
 
-        // Set message
-        $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+         $this->session->set_flashdata('user_loggedin', 'You are now logged in');
 
-        redirect('blog');
-    } else {
-        // Set message
-        $this->session->set_flashdata('login_failed', 'Login is invalid');
 
-        redirect('user/login');
-    }       
+            if ($user_data['level'] == '0') {
+                    redirect('Blog');
+                }else{
+                    redirect('Admin','refresh');
+                }
+            } else {
+        // Set message
+                $this->session->set_flashdata('login_failed', 'Login is invalid');
+
+                redirect('User/login');
+            } 
 }}
          public function logout(){
         // Unset user data

@@ -1,52 +1,24 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Blog extends CI_Controller {
+class Admin extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('form','text');
+	}
 
-  public function __construct()
-  {
-    parent::__construct();
-    $this->load->helper('text');
-    $this->load->helper('form');
-    //Do your magic here
-    if (!isset($_SESSION['logged_in'])){
-      redirect(base_url('index.php/User/login'),'refresh');
-    }
-  }
+	public function index(){
+		$this->load->view('admin/admin');
+	}
 
-  public function pagination() { 
-    $limit_per_page=10;
-    $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-    $total_records= $this->Blog_model->get_total();
-
-    if($total_records > 0 ){
-      $data['records'] = $this->Blog_model->get_all_artikel($limit_per_page,$start_index);
-      $config['base_url'] = base_url().'index.php/blog/pagination';
-      $config['total_rows'] = $total_records;
-      $config['per_page'] = $limit_per_page;
-      $config['uri_segment'] = 3;
-
-      $this->pagination->initialize($config);
-
-      $data['links'] = $this->pagination->create_links();
-    }
-    $this->load->view('blog/Blog_list',$data);
-
-  }
-
-  public function dataTable()
+	public function dataTable()
   {
     $data['records'] = $this->Blog_model->getAll(); 
     $this->load->view('admin/table',$data);  
   }
 
-  public function index() {
-
-    $data['records'] = $this->Blog_model->getAll();
-    $this->load->view('blog/blog_list',$data);
-  }
-
-  public function add_view() {
+    public function add_view() {
     $data['error'] = ""; 
     $this->load->helper(array('form', 'url'));
     $this->load->library('form_validation');
@@ -165,8 +137,5 @@ class Blog extends CI_Controller {
       } 
     }   
   }
-  public function delete_action($id){
-    $this->Blog_model->delete($id);
-    redirect('Blog');
-  }
 }
+?>

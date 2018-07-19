@@ -18,8 +18,8 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="<?php echo base_url('index.php/Biodata') ?>">Home</a></li>
-        <li><a href="<?php echo base_url('index.php/Admin/dataTable') ?>">Blog</a></li>
-        <li><a href="<?php echo base_url('index.php/User_Admin/index') ?>">User</a></li>
+        <li><a href="<?php echo base_url('index.php/Blog/dataTable') ?>">Blog</a></li>
+        <li><a href="<?php echo base_url('index.php/Admin_user/user') ?>">User</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <a class="btn btn-primary navbar-btn" href="<?php echo base_url("index.php/User/logout") ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
@@ -36,12 +36,12 @@
                                     <i class="fa fa-fax fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>New Comments!</div>
+                                    <div class="huge"><?php echo $this->db->get("blog")->num_rows();  ?></div>
+                                    <div>Blog</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="<?php echo base_url('index.php/Blog/dataTable'); ?>">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -57,15 +57,39 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-address-card fa-5x"></i>
+                                    <i class="fa fa-bookmark fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>New Comments!</div>
+                                    <div class="huge"><?php echo $this->db->get("category")->num_rows();  ?></div>
+                                    <div>Category</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+              </div>
+              <div class="container-fluid">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-address-card fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><?php echo $this->db->get("users")->num_rows();  ?></div>
+                                    <div>User</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="<?php echo base_url('index.php/Admin_user/user'); ?>">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

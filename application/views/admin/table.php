@@ -15,9 +15,9 @@
         <a class="navbar-brand" href="#">MyCodeIgniter</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="<?php echo base_url('index.php/Admin/Index') ?>">Home</a></li>
+        <li><a href="<?php echo base_url('index.php/Admin_user/Index') ?>">Home</a></li>
         <li class="active"><a href="#">Blog</a></li>
-        <li><a href="#">User</a></li>
+        <li><a href="<?php echo base_url('index.php/Admin_user/user') ?>">User</a></li>
       </ul>
     </div>
   </nav>
@@ -31,6 +31,7 @@
          <th>Author</th>
          <th>Date</th>
          <th>Title</th>
+         <th>Image</th>
          <th>Action</th>
        </tr>
      </thead>
@@ -41,6 +42,7 @@
          <td><?php echo $d['author'] ?></td>
          <td><?php echo $d['date'] ?></td>
          <td><?php echo $d['title'] ?></td>
+         <td><?php echo $d['image_file'] ?></td>
          <td>
       <a class="btn btn-sm btn-warning mb-1" href="<?php echo base_url('index.php/Blog/update_view/'.$d['id']) ?>"><i class="glyphicon glyphicon-pencil"></i> Edit </a>
        <a class="btn btn-sm btn-info mb-1" href="<?php echo base_url('index.php/Blog/byId/'.$d['id']) ?>"><i class="glyphicon glyphicon-zoom-in"></i> View</a>

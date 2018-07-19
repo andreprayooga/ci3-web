@@ -83,7 +83,7 @@ class Blog extends CI_Controller {
           'image_file' => $dataUpload['file_name']  
           );  
         $this->Blog_model->insert($data); 
-        redirect('Blog');  
+        redirect('Blog/dataTable');  
       } 
     }
   }
